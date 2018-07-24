@@ -9,7 +9,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 				/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after issuing react command");	*/
 				const request = require("snekfetch");
 				let url_messages = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages";
-				var request_headers ={headers:{Authorization:"Bot "+config.token}} 
+				var request_headers ={headers:{Authorization:"Bot "+process.env.BOT_TOKEN}} 
 				request.get(url_messages,request_headers).send().then(function(response){
 					let last_message_id = response.body[0].id;
 					/*logger.debug("last message id was "+last_message_id);*/
