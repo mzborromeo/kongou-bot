@@ -30,6 +30,13 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 								await msg.react(unicodes[x]).then().catch(console.error);
 							}
 						}).catch(console.error);
+					}else if(emote_name.toLowerCase() === "gei"){
+						var unicodes = ["🇬","🇪","🇮"];
+						var last_msg = message.channel.fetchMessage(last_message_id).then(async function(msg){
+							for(var x = 0; x<unicodes.length;x++){
+								await msg.react(unicodes[x]).then().catch(console.error);
+							}
+						}).catch(console.error);						
 					}else if(react_param !== ""){
 						let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+react_param+"/@me";
 						/*logger.debug(url_react);*/
