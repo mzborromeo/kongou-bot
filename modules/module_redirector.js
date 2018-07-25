@@ -1,4 +1,4 @@
-/*message processor*/
+/*module redirector*/
 module.exports = (discord,message,config,client,logger,message_type) => {
 	if(message_type === undefined){/*ignore non command or emote request*/
 		return;
@@ -20,11 +20,8 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 		}
 	}else if(message_type.command_type === "emoji_request"){
 		var x = 0;
-			logger.info(message_type.emoji_names+" was requested");
+			/*logger.info(message_type.emoji_names+" was requested");*/
 			try{
-				message.delete(0)
-				.then(msg => logger.info(`Deleted message from ${msg.author.username} after requesting emote`))
-				.catch(console.error);		
 				var emoji_message = "";	
 				for(x = 0;x<message_type.emoji_names.length;x++){
 					var emote_name = message_type.emoji_names;
@@ -36,7 +33,12 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 						}
 					});
 				}
-				if(emoji_message !== "") message.channel.send(emoji_message);
+				if(emoji_message !== "") {
+					message.channel.send(emoji_message);				
+					message.delete(0)
+					.then(/*msg => logger.info(`Deleted message from ${msg.author.username} after requesting emote`)*/)
+					.catch(console.error);		
+				}
 			}catch(err){
 				/*logger.error(err);*/
 			}	
