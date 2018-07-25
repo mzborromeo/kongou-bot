@@ -24,35 +24,12 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 						}
 					});
 					if(emote_name.toLowerCase() === "lordtim"){
-						var urlenc_unicde = ["%F0%9F%87%B1","%F0%9F%87%B4","%F0%9F%87%B7","%F0%9F%87%A9","%F0%9F%87%B9","%F0%9F%87%AE","%F0%9F%87%B2"];
-							let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+urlenc_unicde[0]+"/@me";
-							request.put(url_react,request_headers).send().then(function(response){
-								let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+urlenc_unicde[1]+"/@me";
-								request.put(url_react,request_headers).send().then(function(response){
-									let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+urlenc_unicde[2]+"/@me";
-									request.put(url_react,request_headers).send().then(function(response){
-										let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+urlenc_unicde[3]+"/@me";
-										request.put(url_react,request_headers).send().then(function(response){
-											let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+urlenc_unicde[4]+"/@me";
-											request.put(url_react,request_headers).send().then(function(response){
-												let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+urlenc_unicde[5]+"/@me";
-												request.put(url_react,request_headers).send().then(function(response){
-													let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+urlenc_unicde[6]+"/@me";
-													request.put(url_react,request_headers).send().then(function(response){														
-													}).catch(function(err){
-													});														
-												}).catch(function(err){
-												});													
-											}).catch(function(err){
-											});												
-										}).catch(function(err){
-										});											
-									}).catch(function(err){
-									});										
-								}).catch(function(err){
-								});									
-							}).catch(function(err){
-							});							
+						var unicodes = ["🇱","🇴","🇷","🇩","🇹","🇮","🇲"];
+						var last_msg = message.channel.fetchMessage(last_message_id).then(async function(msg){
+							for(var x = 0; x<unicodes.length;x++){
+								await msg.react(unicodes[x]).then().catch(console.error);
+							}
+						}).catch(console.error);
 					}else if(react_param !== ""){
 						let url_react = "https://discordapp.com/api/v6/channels/"+message.channel.id+"/messages/"+last_message_id+"/reactions/"+react_param+"/@me";
 						/*logger.debug(url_react);*/
