@@ -20,7 +20,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 		}
 	}else if(message_type.command_type === "emoji_request"){
 		var x = 0;
-			/*logger.info(message_type.emoji_names+" was requested");*/
+			logger.info(message_type.emoji_names+" was requested");
 			try{
 				var emoji_message = "";	
 				for(x = 0;x<message_type.emoji_names.length;x++){
@@ -29,18 +29,21 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					emoji_list.forEach(function(value,key,map){
 						if(emote_name[x] === value.name){
 							let animated_string = (value.animated === true)?"a":"";
-							emoji_message = emoji_message+"<"+animated_string+":"+value.name+":"+value.id+"> ";
+							emoji_message = "<"+animated_string+":"+value.name+":"+value.id+"> ";
 						}
 					});
 				}
 				if(emoji_message !== "") {
 					message.channel.send(emoji_message);				
 					message.delete(0)
-					.then(/*msg => logger.info(`Deleted message from ${msg.author.username} after requesting emote`)*/)
+					.then(msg => logger.info(`Deleted message from ${msg.author.username} after requesting emote`))
 					.catch(console.error);		
 				}
 			}catch(err){
-				/*logger.error(err);*/
+				logger.error(err);
 			}	
+	}else if(message_type.command_type === "special_case"){
+			let special_processor = require("./special_case.js");
+			let special_invoker = special_processor(discord,message,config,client,logger,message_type);		
 	}
 }
