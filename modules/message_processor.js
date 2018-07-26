@@ -1,4 +1,3 @@
-/*message processor*/
 module.exports = (message,config,logger) => {
 	if(message.content.startsWith(config.prefix) === true){
 		let args = message.content.slice(config.prefix.length).trim().split(/ +/g);
@@ -8,6 +7,9 @@ module.exports = (message,config,logger) => {
 	}else if(message.content.startsWith("+") /*&& message.content.endsWith("+")*/){
 		let emote_name = message.content.replace(/\+/g,"").split(" "); 
 		let message_type = {command_type:"emoji_request",emoji_names:emote_name};
+		return message_type;
+	}else{
+		let message_type = {command_type:"special_case"};
 		return message_type;
 	}
 }
