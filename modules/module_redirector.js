@@ -34,10 +34,12 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					});
 				}
 				if(emoji_message !== "") {
+						message.delete(0)
+							.then(function(msg){
+								/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after requesting for emote");	*/
+							}) 
+							.catch(console.error);						
 					message.channel.send(emoji_message);				
-					message.delete(0)
-					.then(/*msg => logger.info(`Deleted message from ${msg.author.username} after requesting emote`)*/)
-					.catch(console.error);		
 				}
 			}catch(err){
 				/*logger.error(err);*/
