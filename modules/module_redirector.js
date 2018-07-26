@@ -29,7 +29,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					emoji_list.forEach(function(value,key,map){
 						if(emote_name[x] === value.name){
 							let animated_string = (value.animated === true)?"a":"";
-							emoji_message = "<"+animated_string+":"+value.name+":"+value.id+"> ";
+							emoji_message += "<"+animated_string+":"+value.name+":"+value.id+"> ";
 						}
 					});
 				}
