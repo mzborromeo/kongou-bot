@@ -38,8 +38,17 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 							.then(function(msg){
 								/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after requesting for emote");	*/
 							}) 
-							.catch(console.error);						
-					message.channel.send(emoji_message);				
+							.catch(console.error);				
+					message.channel.send({
+						embed:{
+							color: 7165476,
+							author:{
+								name:message.author.username+"#"+message.author.discriminator,
+								icon_url:message.author.displayAvatarURL
+							},
+							description:emoji_message
+						}
+					});				
 				}
 			}catch(err){
 				/*logger.error(err);*/
