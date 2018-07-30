@@ -19,8 +19,7 @@ var edit_message =  function(message,field_list){
 			title: "Emote List",
 			fields:field_list
 		}
-	}).then(async function(msg){	
-	}).catch(function(err){
+	}).then().catch(function(err){
 		/*console.log(err);*/
 	});
 	return;
@@ -28,7 +27,7 @@ var edit_message =  function(message,field_list){
 
 var manage_react = async function(msg,page_switch_buttons){
 	for(let x = 0;x<page_switch_buttons.length;x++){
-		await msg.react(page_switch_buttons[x]);
+		await msg.react(page_switch_buttons[x]).then().catch();
 	}
 	return;
 };
@@ -88,9 +87,9 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 						title: "List of servers I'm currenty joined",
 						fields:server_list
 					}
-				});
+				}).then().catch();
 			}catch(err){
-				logger.error(err);
+				/*logger.error(err);*/
 			}
 		}else if(message_type.parameters[0] === "emotes"){
 				var last_message_id = undefined;
@@ -127,7 +126,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					var field_list = embed_fields_proc(emote_list,current_page);
 					send_message(message,emote_list,field_list,page_switch_buttons,current_page);
 				})
-				.catch(console.error);		
+				.catch();		
 		}else if(message_type.parameters[0] === "emotesat"){
 			/*list all of emotes on a given server*/
 		}else if(message_type.parameters[0] === "duplicates"){
