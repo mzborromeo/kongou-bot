@@ -13,7 +13,11 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					var react_id = "";
 					var emote_name = message_type.parameters[0];
 					emoji_list.forEach(function(value,key,map){
-						if(emote_name === value.name){
+						let emote_name_str = ""+emote_name;
+						emote_name_str = emote_name_str.toLowerCase();
+						let value_str = ""+value.name;
+						value_str =  value_str.toLowerCase();						
+						if(emote_name_str === value_str){
 							let animated_string = (value.animated === true)?"a":"";
 							react_id = value.id;
 							return;
@@ -39,7 +43,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					}else if(react_id !== ""){
 						message.delete(0)
 							.then(async function(msg){
-								/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after issuing react command requesting for "+react_id);*/	
+								/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after issuing react command requesting for "+react_id);	*/
 								await value.react(client.emojis.get(react_id)).then(function(){
 								}).catch(console.error);			
 							}) 
