@@ -27,7 +27,11 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					var emote_name = message_type.emoji_names;
 					const emoji_list = client.emojis;
 					emoji_list.forEach(function(value,key,map){
-						if(emote_name[x] === value.name){
+						let emote_name_str = ""+emote_name[x];
+						emote_name_str = emote_name_str.toLowerCase();
+						let value_str = ""+value.name;
+						value_str =  value_str.toLowerCase();
+						if(emote_name_str === value_str){
 							let animated_string = (value.animated === true)?"a":"";
 							emoji_message += "<"+animated_string+":"+value.name+":"+value.id+"> ";
 						}
