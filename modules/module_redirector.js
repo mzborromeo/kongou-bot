@@ -41,18 +41,8 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 							}) 
 							.catch(console.error);				
 					var nickname = message.guild.members.get(message.author.id).nickname;
-					var final_user = (nickname === "" || nickname === undefined)?message.author.username+"#"+message.author.discriminator:nickname
-/*					message.channel.send({
-						embed:{
-							color: 7165476,
-							author:{
-								name:message.author.username+"#"+message.author.discriminator,
-								icon_url:message.author.displayAvatarURL
-							},
-							description:emoji_message
-						}
-					});*/
-
+					var final_user = (nickname === "" || nickname === undefined || nickname === null)?message.author.username+"#"+message.author.discriminator:nickname;
+					console.log(final_user);
 					message.channel.send({
 						embed:{
 							color: 7165476,
