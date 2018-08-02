@@ -27,13 +27,10 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					var emote_name = message_type.emoji_names;
 					const emoji_list = client.emojis;
 					emoji_list.forEach(function(value,key,map){
-						let emote_name_str = ""+emote_name[x];
-						emote_name_str = emote_name_str.toLowerCase();
-						let value_str = ""+value.name;
-						value_str =  value_str.toLowerCase();
-						if(emote_name_str === value_str){
+						if(emote_name[x] === value.name){
 							let animated_string = (value.animated === true)?"a":"";
 							emoji_message += "<"+animated_string+":"+value.name+":"+value.id+"> ";
+							/*emoji_message = value.url;*/
 						}
 					});
 				}
@@ -43,7 +40,8 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 								/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after requesting for emote");	*/
 							}) 
 							.catch(console.error);				
-					message.channel.send({
+					var nickname = message.guild.members.get(message.author.id).nickname;
+/*					message.channel.send({
 						embed:{
 							color: 7165476,
 							author:{
@@ -52,7 +50,31 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 							},
 							description:emoji_message
 						}
-					});				
+					});*/
+
+					message.channel.send({
+						embed:{
+							color: 7165476,
+							author:{
+								name:nickname,
+								icon_url:message.author.displayAvatarURL
+							},
+							description:emoji_message
+						}
+					});					
+
+/*					message.channel.send({
+						embed:{
+							color: 7165476,
+							author:{
+								name:message.author.username+"#"+message.author.discriminator,
+								icon_url:message.author.displayAvatarURL
+							},
+							image:{
+								url:emoji_message
+							}
+						}
+					});*/
 				}
 			}catch(err){
 				/*logger.error(err);*/
