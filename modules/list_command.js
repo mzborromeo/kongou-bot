@@ -119,7 +119,6 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 									content_index = 1;
 								}
 							});	
-							/*logger.debug(emote_list[1]);*/
 						}
 					});
 					var current_page = 1;
@@ -127,6 +126,36 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					send_message(message,emote_list,field_list,page_switch_buttons,current_page);
 				})
 				.catch();		
+		}else if(message_type.parameters[0] === "emotedetail"){
+				var last_message_id = undefined;
+				var emote_list = {};
+				var embed_fields =[];
+				message.channel.fetchMessages({ limit: 2}).then(function(messages){
+					messages.forEach(function(value,key,map){
+						if(value.id !== message.id){
+							last_message_id = value.id;
+							const emoji_list = client.emojis;
+							emoji_list.forEach(function(value,key,map){
+								if(value.name ===  message_type.parameters[1]){
+									let animated_string = (value.animated === true)?"a":"";
+									embed_fields.push({name:"*"+value.id+"*",value:"emote: <"+animated_string+":"+value.name+":"+value.id+">\n"+"name: "+value.name,inline:"true"});
+								}
+							});
+						}
+					});
+					message.channel.send({embed:{
+							color: 7165476,
+							title: "Emote Details",
+							fields:embed_fields
+						}
+					}).then(function(){
+
+					}).catch(function(){
+
+					});					
+				}).catch(function(){
+
+				});
 		}else if(message_type.parameters[0] === "emotesat"){
 			/*list all of emotes on a given server*/
 		}else if(message_type.parameters[0] === "duplicates"){
