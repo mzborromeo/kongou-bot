@@ -17,6 +17,9 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 		}else if(message_type.command_name === "link"){/*for adding reactions to message outside of channel*/
 			let link_processor = require("./link_command.js");
 			let link_invoker = link_processor(discord,message,config,client,logger,message_type);			
+		}else if(message_type.command_name === "renameemote"){
+			let rename_processor = require("./rename_command.js");
+			let rename_invoker = rename_processor(discord,message,config,client,logger,message_type);						
 		}
 	}else if(message_type.command_type === "emoji_request"){
 		var x = 0;
