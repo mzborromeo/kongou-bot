@@ -20,7 +20,11 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 				message_content.includes("emi's just a f2p") ||
 				message_content.includes("f2p") ||
 				message_content.includes("free to play") ||
-				message_content.includes("f2play") ){
+				message_content.includes("f2play") || 
+				message_content.includes("not whale") ||
+				message_content.includes("not a whale") ||
+				message_content.includes("not wheel") ||
+				message_content.includes("not a wheel")){
 				/*logger.debug("statement match trying to react");*/
 				(async function(msg){
 									var unicodes = ["🐳","🐋","🐙","🦑","🇼","🇭","🇦","🇱","🇪"];
