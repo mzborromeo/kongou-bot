@@ -45,14 +45,14 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 							.catch(console.error);				
 					var nickname = message.guild.members.get(message.author.id).nickname;
 					var final_user = (nickname === "" || nickname === undefined || nickname === null)?message.author.username+"#"+message.author.discriminator:nickname;
-					message.channel.send({
+					message.channel.send(emoji_message,{
 						embed:{
 							color: 7165476,
 							author:{
 								name:final_user,
 								icon_url:message.author.displayAvatarURL
 							},
-							description:emoji_message
+							description:"emote above requested by user"
 						}
 					});					
 
