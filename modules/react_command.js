@@ -40,6 +40,14 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 									await value.react(unicodes[x]).then().catch(console.error);
 								}
 							}).catch(console.error);
+					}else if(emote_name.toLowerCase() === "mwheel"){
+						message.delete(0).then(async function(){
+							var unicodes = ["🐳","🐋","🐙","🦑","🇼","🇭","🇦","🇱","🇪"];
+							for(var x = 0; x<unicodes.length;x++){
+								await value.react(unicodes[x]).then()
+								.catch();
+							}
+						}).catch(console.error);
 					}else if(react_id !== ""){
 						message.delete(0)
 							.then(async function(msg){
