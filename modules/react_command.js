@@ -1,15 +1,15 @@
 /*react command*/
-module.exports = (discord,message,config,client,logger,message_type) => {
-	let Discord = discord;
+module.exports = (global_params,message_type) => {
+	let Discord = global_params.discord;
 	if(message_type.command_name === "react"){
 		var last_message_id = undefined;
-		message.channel.fetchMessages({ limit: 2})
+		global_params.message.channel.fetchMessages({ limit: 2})
 		.then(function(messages){
 			messages.forEach(function(value,key,map){
-				if(value.id !== message.id){
+				if(value.id !== global_params.message.id){
 					last_message_id = value.id;
-					/*logger.debug("last message id was "+last_message_id);*/
-					const emoji_list = client.emojis;
+					global_params.logger.debug("last message id was "+last_message_id);
+					const emoji_list = global_params.client.emojis;
 					var react_id = "";
 					var emote_name = message_type.parameters[0];
 					emoji_list.forEach(function(value,key,map){
@@ -25,7 +25,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					});	
 
 					if(emote_name.toLowerCase() === "lordtim"){
-						message.delete(0)
+						global_params.message.delete(0)
 							.then(async function(msg){
 								var unicodes = ["🇱","🇴","🇷","🇩","🇹","🇮","🇲"];
 								for(var x = 0; x<unicodes.length;x++){
@@ -33,7 +33,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 								}
 							}).catch(console.error);						
 					}else if(emote_name.toLowerCase() === "gei"){
-						message.delete(0)
+						global_params.message.delete(0)
 							.then(async function(msg){
 								var unicodes = ["🇬","🇪","🇮"];
 								for(var x = 0; x<unicodes.length;x++){
@@ -41,7 +41,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 								}
 							}).catch(console.error);
 					}else if(emote_name.toLowerCase() === "mwheel"){
-						message.delete(0).then(async function(){
+						global_params.message.delete(0).then(async function(){
 							var unicodes = ["🐳","🐋","🐙","🦑","🇼","🇭","🇦","🇱","🇪"];
 							for(var x = 0; x<unicodes.length;x++){
 								await value.react(unicodes[x]).then()
@@ -49,10 +49,10 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 							}
 						}).catch(console.error);
 					}else if(react_id !== ""){
-						message.delete(0)
+						global_params.message.delete(0)
 							.then(async function(msg){
-								/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after issuing react command requesting for "+react_id);	*/
-								await value.react(client.emojis.get(react_id)).then(function(){
+								global_params.logger.info("Deleted message from "+msg.author.username+":"+global_params.message.id+" after issuing react command requesting for "+react_id);	
+								await value.react(global_params.client.emojis.get(react_id)).then(function(){
 								}).catch(console.error);			
 							}) 
 							.catch(console.error);
@@ -62,5 +62,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 			});
 		})
 		.catch(console.error);		
+	}else if(message_type.command_name === "reactto"){
+
 	}
 }
