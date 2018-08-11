@@ -1,13 +1,13 @@
 /*special case processor*/
 module.exports = (global_params,message_type) => {
 	let Discord = global_params.discord;
+	var message_content = ""+global_params.message.content;
+	message_content = message_content.toLowerCase();
 	if(global_params.message.author.id === "232221425329504257"){
 		/*emi case 232221425329504257 */
 		try{
 			global_params.logger.debug("user matched");
 			var triggered = false;
-			var message_content = ""+global_params.message.content;
-			message_content = message_content.toLowerCase();
 			if(message_content.includes("emi is f2p") || 
 				message_content.includes("i'm f2p") || 
 				message_content.includes("me f2p") || 
