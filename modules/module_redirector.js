@@ -1,34 +1,34 @@
 /*module redirector*/
-module.exports = (discord,message,config,client,logger,message_type) => {
+module.exports = (global_params,message_type) => {
 	if(message_type === undefined){/*ignore non command or emote request*/
 		return;
 	}
 	if(message_type.command_type === "command"){
 		if(message_type.command_name === "list"){
 			let list_processor = require("./list_command.js");
-			let list_invoker = list_processor(discord,message,config,client,logger,message_type);
+			let list_invoker = list_processor(global_params,message_type);
 		}else if(message_type.command_name === "react"){/*for adding reactions on channels last visible message*/
 			let react_processor = require("./react_command.js");
-			let react_invoker = react_processor(discord,message,config,client,logger,message_type);
+			let react_invoker = react_processor(global_params,message_type);
 		}else if(message_type.command_name === "reactto"){/*for adding reactions to message outside of channel*/
 
 		}else if(message_type.command_name === "send"){/*for send modules*/
 
 		}else if(message_type.command_name === "link"){/*for adding reactions to message outside of channel*/
 			let link_processor = require("./link_command.js");
-			let link_invoker = link_processor(discord,message,config,client,logger,message_type);			
+			let link_invoker = link_processor(global_params,message_type);			
 		}else if(message_type.command_name === "renameemote"){
 			let rename_processor = require("./rename_command.js");
-			let rename_invoker = rename_processor(discord,message,config,client,logger,message_type);						
+			let rename_invoker = rename_processor(global_params,message_type);						
 		}
 	}else if(message_type.command_type === "emoji_request"){
 		var x = 0;
-			/*logger.info(message_type.emoji_names+" was requested");*/
+			global_params.logger.info(message_type.emoji_names+" was requested");
 			try{
 				var emoji_message = "";	
 				for(x = 0;x<message_type.emoji_names.length;x++){
 					var emote_name = message_type.emoji_names;
-					const emoji_list = client.emojis;
+					const emoji_list = global_params.client.emojis;
 					emoji_list.forEach(function(value,key,map){
 						if(emote_name[x] === value.name){
 							let animated_string = (value.animated === true)?"a":"";
@@ -38,42 +38,29 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 					});
 				}
 				if(emoji_message !== "") {
-						message.delete(0)
+						global_params.message.delete(0)
 							.then(function(msg){
-								/*logger.info("Deleted message from "+msg.author.username+":"+message.id+" after requesting for emote");	*/
+								global_params.logger.info("Deleted message from "+msg.author.username+":"+global_params.message.id+" after requesting for emote");	
 							}) 
 							.catch(console.error);				
-					var nickname = message.guild.members.get(message.author.id).nickname;
-					var final_user = (nickname === "" || nickname === undefined || nickname === null)?message.author.username+"#"+message.author.discriminator:nickname;
-					message.channel.send(emoji_message,{
+					var nickname = global_params.message.guild.members.get(global_params.message.author.id).nickname;
+					var final_user = (nickname === "" || nickname === undefined || nickname === null)?global_params.message.author.username+"#"+global_params.message.author.discriminator:nickname;
+					global_params.message.channel.send(emoji_message,{
 						embed:{
 							color: 7165476,
 							author:{
 								name:final_user,
-								icon_url:message.author.displayAvatarURL
+								icon_url:global_params.message.author.displayAvatarURL
 							},
 							description:"emote above requested by user"
 						}
 					});					
-
-/*					message.channel.send({
-						embed:{
-							color: 7165476,
-							author:{
-								name:message.author.username+"#"+message.author.discriminator,
-								icon_url:message.author.displayAvatarURL
-							},
-							image:{
-								url:emoji_message
-							}
-						}
-					});*/
 				}
 			}catch(err){
-				/*logger.error(err);*/
+				global_params.logger.error(err);
 			}	
 	}else if(message_type.command_type === "special_case"){
 			let special_processor = require("./special_case.js");
-			let special_invoker = special_processor(discord,message,config,client,logger,message_type);		
+			let special_invoker = special_processor(global_params,message_type);		
 	}
 }
