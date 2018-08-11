@@ -1,23 +1,22 @@
 /*link command*/
-/*message processor*/
-module.exports = (discord,message,config,client,logger,message_type) => {
-	let Discord = discord;
+module.exports = (global_params,message_type) => {
+	let Discord = global_params.discord;
 	if(message_type.command_name === "link"){
 		if(message_type.parameters[0] === "avatar"){
 			/*sends link of user avatar*/
 
 		}else if(message_type.parameters[0] === "emote"){
 			var emote_name = message_type.parameters[1];
-			/*logger.info(emote_name+" url was requested");*/
+			global_params.logger.info(emote_name+" url was requested");
 			try{
-				const emoji_list = client.emojis;
+				const emoji_list = global_params.client.emojis;
 				emoji_list.forEach(function(value,key,map){
 					if(emote_name === value.name){
-						message.channel.send(value.url);
+						global_params.message.channel.send(value.url);
 					}
 				});
 			}catch(err){
-				/*logger.error(err);*/
+				global_params.logger.error(err);
 			}				
 		}
 	}
