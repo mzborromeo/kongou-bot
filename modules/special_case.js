@@ -47,5 +47,7 @@ module.exports = (discord,message,config,client,logger,message_type) => {
 		}catch(err){
 			/*logger.error(err);*/
 		}
+	}else if(message_content.includes("patchy is")){
+		message.channel.send("Sarin's bff");
 	}
 }
