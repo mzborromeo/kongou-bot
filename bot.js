@@ -1,7 +1,7 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-
+const request = require('ajax-request');
 
 const log4js = require('log4js');
 log4js.configure({
@@ -18,15 +18,21 @@ log4js.configure({
 		}
 	},
 	categories: { 
-		default: { appenders: ['system'], level: 'debug' },
-		dm:{ appenders: ['dm'], level: 'debug' },
-		system:{ appenders: ['system'], level: 'debug' } 
+		default: { appenders: ['system'], level: 'off' },
+		dm:{ appenders: ['dm'], level: 'off' },
+		system:{ appenders: ['system'], level: 'off' } 
 	}
 });
 
 const logger  = log4js.getLogger('system');
 const dm_logger  = log4js.getLogger('dm');
-
+const global_params = {
+	discord:Discord,
+	client:client,
+	config:config,
+	request:request,
+	logger:logger
+}
 
 client.on("ready", () => {
 	client.user.setActivity(`on ${client.guilds.size} servers`);
@@ -34,7 +40,7 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-	
+	global_params.message = message;
 	if (message.author.bot) return;/*ignore bots*/
 	
 	if(message.channel.type === "dm" && message.author.id !== process.env.OWNER_ID){/*dm from other user*/
@@ -46,7 +52,7 @@ client.on("message", (message) => {
 		let message_type_processor = require("./modules/message_processor.js");
 		let message_type = message_type_processor(message,config,logger);
 		let module_redirector = require("./modules/module_redirector.js");
-		let accessed_module = module_redirector(Discord,message,config,client,logger,message_type);
+		let accessed_module = module_redirector(global_params,message_type);
 	}
 
 });
