@@ -28,14 +28,23 @@ log4js.configure({
 
 const logger  = log4js.getLogger('system');
 const dm_logger  = log4js.getLogger('dm');
-const global_params = {
-	discord:Discord,
-	client:client,
-	config:config,
-	request:request,
-	logger:logger,
-	customsearch:customsearch,
-	env_vars:process.env
+function GlobalParam(){
+	this.discord = Discord;
+	this.client  = client;
+	this.config  = config;
+	this.request = request;
+	this.logger  = logger;
+	this.customsearch = customsearch
+	this.message = undefined;
+	this.env_vars = process.env; 
+	var self = this;
+	this.setMessage = function(message_param){
+		self.message = message_param;
+	};
+
+	this.getMessage = function(){
+		return self.message;
+	}
 }
 
 client.on("ready", () => {
@@ -44,7 +53,8 @@ client.on("ready", () => {
 });
 
 client.on("message", (message) => {
-	global_params.message = message;
+	var global_params = new GlobalParam();
+	global_params.setMessage(message);
 	if (message.author.bot) return;/*ignore bots*/
 	
 	if(message.channel.type === "dm" && message.author.id !== process.env.OWNER_ID){/*dm from other user*/
