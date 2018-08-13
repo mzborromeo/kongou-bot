@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 const request = require('ajax-request');
+const {google} = require('googleapis');
 const customsearch = google.customsearch('v1');
 
 const log4js = require('log4js');
