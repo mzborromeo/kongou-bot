@@ -30,6 +30,16 @@ var manage_react = async function(msg,page_switch_buttons){
 	return;
 };
 
+var send_empty_message = function(message){
+	message.edit({embed:{
+			color: 7165476,
+			title: "Emote List",
+			description:"Nothing on this page"
+		}
+	}).then().catch();
+	return;
+}
+
 var send_message =  function(message,emote_list,field_list,page_switch_buttons,current_page){
 	var is_next = false;
 	message.channel.send({embed:{
@@ -45,17 +55,32 @@ var send_message =  function(message,emote_list,field_list,page_switch_buttons,c
 			if(r.emoji.name === page_switch_buttons[0]){
 				current_page+= -1;
 				var field_list = embed_fields_proc(emote_list,current_page);
-				edit_message(msg,field_list);				
-				msg.clearReactions().then(function(){
-					manage_react(msg,page_switch_buttons);
-				}).catch();
+				if(field_list.length === 0){
+					send_empty_message(msg);
+					msg.clearReactions().then(function(){
+						manage_react(msg,page_switch_buttons);
+					}).catch();										
+				}else{
+					edit_message(msg,field_list);				
+					msg.clearReactions().then(function(){
+						manage_react(msg,page_switch_buttons);
+					}).catch();					
+				}
+
 			}else if(r.emoji.name === page_switch_buttons[1]){
 				current_page+= 1;
 				var field_list = embed_fields_proc(emote_list,current_page);
-				edit_message(msg,field_list);				
-				msg.clearReactions().then(function(){
-					manage_react(msg,page_switch_buttons);
-				}).catch();
+				if(field_list.length === 0){
+					send_empty_message(msg);
+					msg.clearReactions().then(function(){
+						manage_react(msg,page_switch_buttons);
+					}).catch();			
+				}else{
+					edit_message(msg,field_list);				
+					msg.clearReactions().then(function(){
+						manage_react(msg,page_switch_buttons);
+					}).catch();
+				}
 			}		
 		});
 		collector.on('end', function(collected){
@@ -156,7 +181,42 @@ module.exports = (global_params,message_type) => {
 
 					});
 			}else if(message_type.parameters[0] === "emotesat"){
-				/*list all of emotes on a given server*/
+					var last_message_id = undefined;
+					var page_switch_buttons = ["◀","▶"];
+					var emote_list = {};
+					global_params.message.channel.fetchMessages({ limit: 1})
+					.then(function(messages){
+						messages.forEach(function(value,key,map){
+							if(value.id !== msg.id){
+								last_message_id = value.id;
+								/*global_params.logger.debug("last message id was "+last_message_id);*/
+								const emoji_list = global_params.client.emojis;
+								var react_id = "";
+								var emote_name = message_type.parameters[0];
+								var content_index = 1;
+								var page_num = 1;
+								var content = [];
+								emoji_list.forEach(function(value,key,map){
+									global_params.logger.debug("id: "+value.id+" index: "+content_index+" page: "+page_num);
+									if(value.guild.id === message_type.parameters[1]){
+										content.push({id:value.id,name: value.name,animated:value.animated});
+										content_index++
+										if(content_index > 25){
+											emote_list[page_num] = JSON.parse(JSON.stringify(content));
+											page_num++;
+											content.length = 0;
+											content_index = 1;
+										}
+									}
+								});	
+								global_params.logger.debug(emote_list);
+							}
+						});
+						var current_page = 1;
+						var field_list = embed_fields_proc(emote_list,current_page);
+						send_message(msg,emote_list,field_list,page_switch_buttons,current_page);
+					})
+					.catch();
 			}else if(message_type.parameters[0] === "duplicates"){
 				/*list all of duplicate emotes*/
 			}
