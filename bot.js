@@ -31,7 +31,8 @@ const global_params = {
 	client:client,
 	config:config,
 	request:request,
-	logger:logger
+	logger:logger,
+	env_vars:process.env
 }
 
 client.on("ready", () => {
