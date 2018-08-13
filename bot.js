@@ -2,6 +2,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
 const request = require('ajax-request');
+const customsearch = google.customsearch('v1');
 
 const log4js = require('log4js');
 log4js.configure({
@@ -32,6 +33,7 @@ const global_params = {
 	config:config,
 	request:request,
 	logger:logger,
+	customsearch:customsearch,
 	env_vars:process.env
 }
 
