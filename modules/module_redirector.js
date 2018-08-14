@@ -20,7 +20,9 @@ module.exports = (global_params,message_type) => {
 		}else if(message_type.command_name === "renameemote"){
 			let rename_processor = require("./rename_command.js");
 			let rename_invoker = rename_processor(global_params,message_type);						
-		}else if(message_type.command_name === "gsearch"){
+		}else if(message_type.command_name === "gsearch" ||
+			message_type.command_name === "tgtis" ||
+			message_type.command_name === "tgris"){
 			let gsearch_processor = require("./google_search_command.js");
 			let gsearch_invoker = gsearch_processor(global_params,message_type);						
 		}
