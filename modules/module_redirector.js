@@ -4,14 +4,20 @@ module.exports = (global_params,message_type) => {
 		return;
 	}
 	if(message_type.command_type === "command"){
-		if(message_type.command_name === "list"){
+		if(message_type.command_name === "list" ||
+			message_type.command_name === "ls" ||
+			message_type.command_name === "lae" ||
+			message_type.command_name === "laae" ||
+			message_type.command_name === "lase" ||
+			message_type.command_name === "laeas" ||
+			message_type.command_name === "laseas" ||
+			message_type.command_name === "laaeas" ||
+			message_type.command_name === "led"){
 			let list_processor = require("./list_command.js");
 			let list_invoker = list_processor(global_params,message_type);
-		}else if(message_type.command_name === "react"){/*for adding reactions on channels last visible message*/
+		}else if(message_type.command_name === "react" || message_type.command_name === "reactto"){/*for adding reactions on channels last visible message*/
 			let react_processor = require("./react_command.js");
 			let react_invoker = react_processor(global_params,message_type);
-		}else if(message_type.command_name === "reactto"){/*for adding reactions to message outside of channel*/
-
 		}else if(message_type.command_name === "send"){/*for send modules*/
 
 		}else if(message_type.command_name === "link"){/*for adding reactions to message outside of channel*/
