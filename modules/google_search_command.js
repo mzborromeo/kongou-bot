@@ -1,9 +1,9 @@
 /*gsearch command*/
 var run_search = async function(global_params,param_string,is_random){
 	var res = await global_params.customsearch.cse.list({
-		cx:global_params.env_vars.GOOGLE_IMAGE_SEARCH_ID,
+		cx: "017307889707339732948:vgqumww-j_o",
 		q: param_string,
-		auth:global_params.env_vars.GOOGLE_API_KEY,
+		auth: "AIzaSyD4x8a0jyBe_HbNAcL4nwOk9ldix5IhunM",
 		num:10,
 		searchType:"image"
 	}).then(function(result){
@@ -67,5 +67,27 @@ module.exports = (global_params,message_type) => {
 				global_params.logger.debug(err);
 			}
 		}
+	}else if(message_type.command_name === "tgtis"){
+			try{
+				var param_string = "";
+				for(var x=0;x<message_type.parameters.length;x++){
+					param_string+=message_type.parameters[x]+" ";
+				}
+				global_params.logger.debug("searching image using keyword "+param_string);
+				run_search(global_params,param_string,false);
+			}catch(err){
+				global_params.logger.debug(err);
+			}
+	}else if(message_type.command_name === "tgris"){
+			try{
+				var param_string = "";
+				for(var x=0;x<message_type.parameters.length;x++){
+					param_string+=message_type.parameters[x]+" ";
+				}
+				global_params.logger.debug("searching image using keyword "+param_string);
+				run_search(global_params,param_string,true);
+			}catch(err){
+				global_params.logger.debug(err);
+			}
 	}
 }
