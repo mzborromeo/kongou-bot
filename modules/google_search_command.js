@@ -67,7 +67,7 @@ module.exports = (global_params,message_type) => {
 				global_params.logger.debug(err);
 			}
 		}
-	}else if(message_type.command_name === "tgtis"){
+	}else if(message_type.command_name === "gtis"){
 			try{
 				var param_string = "";
 				for(var x=0;x<message_type.parameters.length;x++){
@@ -78,7 +78,7 @@ module.exports = (global_params,message_type) => {
 			}catch(err){
 				global_params.logger.debug(err);
 			}
-	}else if(message_type.command_name === "tgris"){
+	}else if(message_type.command_name === "gris"){
 			try{
 				var param_string = "";
 				for(var x=0;x<message_type.parameters.length;x++){
