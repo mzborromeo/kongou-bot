@@ -3,6 +3,7 @@ module.exports = (global_params,message_type) => {
 	if(message_type === undefined){/*ignore non command or emote request*/
 		return;
 	}
+	var fun_command_processor = require("./fun_commands.js");
 	if(message_type.command_type === "command"){
 		if(message_type.command_name === "list" ||
 			message_type.command_name === "ls" ||
@@ -31,6 +32,8 @@ module.exports = (global_params,message_type) => {
 			message_type.command_name === "gris"){
 			let gsearch_processor = require("./google_search_command.js");
 			let gsearch_invoker = gsearch_processor(global_params,message_type);						
+		}else if(fun_command_processor.check_names(message_type.command_name).has_match ===true){
+			let command_invoker = fun_command_processor[fun_command_processor.check_names(message_type.command_name).matching_name](global_params,message_type);
 		}
 	}else if(message_type.command_type === "emoji_request"){
 		var x = 0;
