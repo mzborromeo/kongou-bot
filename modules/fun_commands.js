@@ -50,7 +50,6 @@ module.exports = {
 			var mentioned_count = msg.mentions.members.size;
 			var bomb_emotes = ["<:crybomb:471247517900734464>","<:bhbomb:471247517036576768>","<:crybomb:471247517900734464>","<:bhbomb:471247517036576768>","<:crybomb:471247517900734464>","<:bhbomb:471247517036576768>"];
 			var random_index = Math.floor(Math.random() * ((bomb_emotes.length-1) - 0) + 0);
-			console.log(random_index);
 			if(mentioned_count === 1){
 				var mentioned_user = "";
 				msg.mentions.members.forEach(function(value,key,map){
