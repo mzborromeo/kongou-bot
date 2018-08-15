@@ -48,6 +48,14 @@ module.exports = (global_params,message_type) => {
 								.catch();
 							}
 						}).catch(console.error);
+					}else if(emote_name.toLowerCase() === "combobreak"){
+						global_params.message.delete(0).then(async function(){
+							var unicodes = ["🇨","🇴","🇲","🇧","🅾","🅱","🇷","🇪","🇦","🇰"]
+							for(var x = 0; x<unicodes.length;x++){
+								await value.react(unicodes[x]).then()
+								.catch();
+							}
+						}).catch(console.error);						
 					}else if(react_id !== ""){
 						global_params.message.delete(0)
 							.then(async function(msg){
