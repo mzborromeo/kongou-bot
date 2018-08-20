@@ -3,6 +3,10 @@ module.exports = (global_params,message_type) => {
 	let Discord = global_params.discord;
 	var message_content = ""+global_params.message.content;
 	message_content = message_content.toLowerCase();
+	/*
+		author id: 349399428810932234
+		target id: 232221425329504257
+	*/
 	if(global_params.message.author.id === "232221425329504257"){
 		/*emi case 232221425329504257 */
 		try{
@@ -32,7 +36,7 @@ module.exports = (global_params,message_type) => {
 										await msg.react(unicodes[x]).then(msge => global_params.logger.debug("react success"))
 										.catch(msge => global_params.logger.debug("react failed"));
 									}
-								})(message);
+								})(global_params.message);
 				triggered = true;
 			}else if(message_content.includes("don't spend") || message_content.includes("didn't spend")){
 				global_params.message.channel.send("You mean whale hard?");
