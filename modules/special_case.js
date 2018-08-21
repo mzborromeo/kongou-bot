@@ -51,6 +51,14 @@ module.exports = (global_params,message_type) => {
 		}catch(err){
 			global_params.logger.error(err);
 		}
+	}else if(global_params.message.author.id === "109385289813798912" && message_content.includes("<:rikawow:386902445785219072>")){
+		(async function(msg){
+							var unicodes = ["🇬","🇪","🇮"];
+							for(var x = 0; x<unicodes.length;x++){
+								await msg.react(unicodes[x]).then(msge => global_params.logger.debug("react success"))
+								.catch(msge => global_params.logger.debug("react failed"));
+							}
+						})(global_params.message);
 	}else if(message_content.includes("patchy is")){/*custom react test*/
 		global_params.message.channel.send("Sarin's bff");
 	}
