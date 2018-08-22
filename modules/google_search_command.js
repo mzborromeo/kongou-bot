@@ -41,7 +41,7 @@ var run_search = async function(global_params,param_string,is_random){
 		global_params.logger.error(err);
 	});
 };
-module.exports = (global_params,message_type) => {
+module.exports = (global_params,global_settings,message_type) => {
 	let Discord = global_params.discord;
 	if(message_type.command_name === "gsearch"){
 		if(message_type.parameters[0] === "timg"){
