@@ -1,5 +1,5 @@
 /*special case processor*/
-module.exports = (global_params,message_type) => {
+module.exports = (global_params,global_settings,message_type) => {
 	let Discord = global_params.discord;
 	var message_content = ""+global_params.message.content;
 	message_content = message_content.toLowerCase();
@@ -9,7 +9,7 @@ module.exports = (global_params,message_type) => {
 		emi id: 232221425329504257
 		yush id: 109385289813798912
 	*/
-	if(global_params.message.author.id === "232221425329504257"){
+	if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
 		/*emi case 232221425329504257 */
 		try{
 			global_params.logger.debug("user matched");
@@ -53,7 +53,7 @@ module.exports = (global_params,message_type) => {
 		}catch(err){
 			global_params.logger.error(err);
 		}
-	}else if(global_params.message.author.id === "109385289813798912" && message_content.match(/\<(a|):[A-Z|a-z]*:[0-9]{18}\>/g) && channel_name.includes("general")){/*regex is to detect for emotes*/
+	}else if(global_params.message.author.id === "109385289813798912" && message_content.match(/\<(a|):[A-Z|a-z]*:[0-9]{18}\>/g) && channel_name.includes("general") && global_settings.gei === true){
 		(async function(msg){
 							var unicodes = ["🇬","🇪","🇮"];
 							for(var x = 0; x<unicodes.length;x++){
@@ -61,7 +61,7 @@ module.exports = (global_params,message_type) => {
 								.catch(msge => global_params.logger.debug("react failed"));
 							}
 						})(global_params.message);
-	}else if(message_content.includes("patchy is")){/*custom react test*/
+	}else if(message_content.includes("patchy is") && global_settings.bff === true){/*custom react test*/
 		global_params.message.channel.send("Sarin's bff");
 	}
 }
