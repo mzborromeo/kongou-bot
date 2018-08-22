@@ -9,7 +9,7 @@ module.exports = {
 		}
 		return name_validation;
 	},
-	shoot:function(global_params,message_type){
+	shoot:function(global_params,global_settings,message_type){
 		global_params.message.delete(0).then(function(msg){
 			var mentioned_count = msg.mentions.members.size;
 			if(mentioned_count === 1){
@@ -45,7 +45,7 @@ module.exports = {
 			global_params.logger.error(err);
 		});
 	},
-	bomb:function(global_params,message_type){
+	bomb:function(global_params,global_settings,message_type){
 		global_params.message.delete(0).then(function(msg){
 			var mentioned_count = msg.mentions.members.size;
 			var bomb_emotes = ["<:crybomb:471247517900734464>","<:bhbomb:471247517036576768>","<:crybomb:471247517900734464>","<:bhbomb:471247517036576768>","<:crybomb:471247517900734464>","<:bhbomb:471247517036576768>"];
