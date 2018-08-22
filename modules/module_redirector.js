@@ -1,5 +1,5 @@
 /*module redirector*/
-module.exports = (global_params,message_type) => {
+module.exports = (global_params,global_settings,message_type) => {
 	if(message_type === undefined){/*ignore non command or emote request*/
 		return;
 	}
@@ -15,25 +15,28 @@ module.exports = (global_params,message_type) => {
 			message_type.command_name === "laaeas" ||
 			message_type.command_name === "led"){
 			let list_processor = require("./list_command.js");
-			let list_invoker = list_processor(global_params,message_type);
+			let list_invoker = list_processor(global_params,global_settings,message_type);
 		}else if(message_type.command_name === "react" || message_type.command_name === "reactto"){/*for adding reactions on channels last visible message*/
 			let react_processor = require("./react_command.js");
-			let react_invoker = react_processor(global_params,message_type);
+			let react_invoker = react_processor(global_params,global_settings,message_type);
 		}else if(message_type.command_name === "send"){/*for send modules*/
 
 		}else if(message_type.command_name === "link"){/*for adding reactions to message outside of channel*/
 			let link_processor = require("./link_command.js");
-			let link_invoker = link_processor(global_params,message_type);			
+			let link_invoker = link_processor(global_params,global_settings,message_type);			
 		}else if(message_type.command_name === "renameemote"){
 			let rename_processor = require("./rename_command.js");
-			let rename_invoker = rename_processor(global_params,message_type);						
+			let rename_invoker = rename_processor(global_params,global_settings,message_type);						
+		}else if(message_type.command_name === "disable" || message_type.command_name === "enable"){
+			let auto_processor = require("./set_auto.js");
+			let auto_invoker = auto_processor(global_params,global_settings,message_type);						
 		}else if(message_type.command_name === "gsearch" ||
 			message_type.command_name === "gtis" ||
 			message_type.command_name === "gris"){
 			let gsearch_processor = require("./google_search_command.js");
-			let gsearch_invoker = gsearch_processor(global_params,message_type);						
+			let gsearch_invoker = gsearch_processor(global_params,global_settings,message_type);						
 		}else if(fun_command_processor.check_names(message_type.command_name).has_match ===true){
-			let command_invoker = fun_command_processor[fun_command_processor.check_names(message_type.command_name).matching_name](global_params,message_type);
+			let command_invoker = fun_command_processor[fun_command_processor.check_names(message_type.command_name).matching_name](global_params,global_settings,message_type);
 		}
 	}else if(message_type.command_type === "emoji_request"){
 		var x = 0;
@@ -75,6 +78,6 @@ module.exports = (global_params,message_type) => {
 			}	
 	}else if(message_type.command_type === "special_case"){
 			let special_processor = require("./special_case.js");
-			let special_invoker = special_processor(global_params,message_type);		
+			let special_invoker = special_processor(global_params,global_settings,message_type);		
 	}
 }
