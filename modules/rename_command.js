@@ -1,5 +1,5 @@
 /*rename command*/
-module.exports = (global_params,message_type) => {
+module.exports = (global_params,global_settings,message_type) => {
 	let Discord = global_params.discord;
 	if(message_type.command_name === "renameemote" && global_params.message.guild.id !== "392004770228862977"){
 		var emote_id = message_type.parameters[0];
