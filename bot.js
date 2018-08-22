@@ -71,4 +71,20 @@ client.on("message", (message) => {
 
 });
 
+client.on("messageDelete",(message) => {
+	/*mirai,kongou, and rin id*/
+	if(message.channel.id === "447355800126488576" && (message.author.id === "125367104336691200" || message.author.id === "469873642449141770" || message.author.id === "471592678711361546")){
+		message.channel.send("<a:renshrug:470985056056508426>",{embed:{
+			title:message.embeds[0].title,
+			description:message.embeds[0].description,
+			color:message.embeds[0].color,
+			author:{
+				name:message.embeds[0].author.name,
+				icon_url:message.embeds[0].author.iconURL
+			},
+			timestamp:message.embeds[0].timestamp
+		}}).then().catch(err => logger.debug(err));
+	}
+});
+
 client.login(process.env.BOT_TOKEN);
