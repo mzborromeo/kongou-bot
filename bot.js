@@ -86,5 +86,5 @@ client.on("messageDelete",(message) => {
 		}}).then().catch(err => logger.debug(err));
 	}
 });
-
+/*testwh*/
 client.login(process.env.BOT_TOKEN);
