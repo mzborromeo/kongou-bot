@@ -1,7 +1,7 @@
 /*set auto response*/
 module.exports = (global_params,global_settings,message_type) => {
 	let Discord = global_params.discord;
-	if(global_params.message.author.id === global_params.config.owner_id){
+	if(global_params.message.author.id === global_params.env_vars.OWNER_ID){
 		if(message_type.command_name === "disable"){
 			var setting = message_type.parameters[0]+""; 
 			if(setting.toLowerCase() === "bff"){
