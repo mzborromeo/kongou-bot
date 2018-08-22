@@ -3,9 +3,11 @@ module.exports = (global_params,message_type) => {
 	let Discord = global_params.discord;
 	var message_content = ""+global_params.message.content;
 	message_content = message_content.toLowerCase();
+	var channel_name = global_params.client.channels.get(global_params.message.channel.id).name+"";
 	/*
 		author id: 349399428810932234
-		target id: 232221425329504257
+		emi id: 232221425329504257
+		yush id: 109385289813798912
 	*/
 	if(global_params.message.author.id === "232221425329504257"){
 		/*emi case 232221425329504257 */
@@ -51,7 +53,7 @@ module.exports = (global_params,message_type) => {
 		}catch(err){
 			global_params.logger.error(err);
 		}
-	}else if(global_params.message.author.id === "109385289813798912" && message_content.includes("<:rikawow:386902445785219072>")){
+	}else if(global_params.message.author.id === "109385289813798912" && message_content.match(/\<(a|):[A-Z|a-z]*:[0-9]{18}\>/g) && channel_name.includes("general")){/*regex is to detect for emotes*/
 		(async function(msg){
 							var unicodes = ["🇬","🇪","🇮"];
 							for(var x = 0; x<unicodes.length;x++){
