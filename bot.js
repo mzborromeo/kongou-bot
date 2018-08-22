@@ -45,7 +45,13 @@ function GlobalParam(){
 	this.getMessage = function(){
 		return self.message;
 	}
-}
+};
+
+var global_settings = {
+	f2p:true,
+	bff:true,
+	gei:true
+};
 
 client.on("ready", () => {
 	client.user.setActivity(`on ${client.guilds.size} servers`);
@@ -66,7 +72,7 @@ client.on("message", (message) => {
 		let message_type_processor = require("./modules/message_processor.js");
 		let message_type = message_type_processor(message,config,logger);
 		let module_redirector = require("./modules/module_redirector.js");
-		let accessed_module = module_redirector(global_params,message_type);
+		let accessed_module = module_redirector(global_params,global_settings,message_type);
 	}
 
 });
