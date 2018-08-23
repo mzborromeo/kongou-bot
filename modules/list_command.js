@@ -258,7 +258,7 @@ function listEmotesAt(global_params,msg,message_type,filter,is_short_mode){
 	.catch();	
 }
 
-module.exports = (global_params,message_type) => {
+module.exports = (global_params,global_settings,message_type) => {
 	if(message_type.command_name === "list"){
 		global_params.message.delete(0).then(function(msg){
 			if(message_type.parameters[0] === "server"){
