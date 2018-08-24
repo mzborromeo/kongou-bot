@@ -116,5 +116,5 @@ client.on("messageDeleteBulk",(messages) => {
 		}
 	});
 });
-
+/*test auto deploy*/
 client.login(process.env.BOT_TOKEN);
