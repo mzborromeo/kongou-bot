@@ -1,9 +1,9 @@
 /*gsearch command*/
 var run_search = async function(global_params,param_string,is_random){
 	var res = await global_params.customsearch.cse.list({
-		cx: "017307889707339732948:vgqumww-j_o",
+		cx: global_params.env_vars.GOOGLE_IMAGE_SEARCH_ID,
 		q: param_string,
-		auth: "AIzaSyD4x8a0jyBe_HbNAcL4nwOk9ldix5IhunM",
+		auth: global_params.env_vars.GOOGLE_API_KEY,
 		num:10,
 		searchType:"image"
 	}).then(function(result){
