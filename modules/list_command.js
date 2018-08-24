@@ -148,9 +148,9 @@ function listAllEmotes(global_params,msg,message_type,filter){
 					global_params.logger.debug(filtered_out);
 					if(filtered_out !== true){
 						content.push({id:value.id,name: value.name,animated:value.animated});
+						emote_list[page_num] = JSON.parse(JSON.stringify(content));
 						content_index++
 						if(content_index > 25){
-							emote_list[page_num] = JSON.parse(JSON.stringify(content));
 							page_num++;
 							content.length = 0;
 							content_index = 1;
@@ -224,31 +224,36 @@ function listEmotesAt(global_params,msg,message_type,filter,is_short_mode){
 				var content = [];
 				var filtered_out = true;
 				emoji_list.forEach(function(value,key,map){
-					var value_guild_name = value.guild.name+"";
-					if(filter === EmoteFilters.ANIMATED && value.animated === true){
-						filtered_out = false;
-					}else if(filter === EmoteFilters.STATIC && value.animated === false){
-						filtered_out = false;
-					}else if(filter === EmoteFilters.ALL){
-						filtered_out = false;
-					}else{
-						filtered_out = true;
-					}					
-					if(filtered_out !== true){
-						if((value.guild.id === message_type.parameters[(is_short_mode === true)?0:1]) || (value_guild_name.toLowerCase().trim() === guild_name.toLowerCase().trim())){
-							global_params.logger.debug("content added");
-							content.push({id:value.id,name: value.name,animated:value.animated});
-							content_index++
-							if(content_index > 25){
+					try{
+						var value_guild_name = value.guild.name+"";
+						if(filter === EmoteFilters.ANIMATED && value.animated === true){
+							filtered_out = false;
+						}else if(filter === EmoteFilters.STATIC && value.animated === false){
+							filtered_out = false;
+						}else if(filter === EmoteFilters.ALL){
+							filtered_out = false;
+						}else{
+							filtered_out = true;
+						}			
+						if(filtered_out !== true){
+							if((value.guild.id === message_type.parameters[(is_short_mode === true)?0:1]) || (value_guild_name.toLowerCase().trim() === guild_name.toLowerCase().trim())){
+								/*global_params.logger.debug(value.name+" filtered_out:"+filtered_out+" animated: "+value.animated+" emote guild name:"+value_guild_name);*/
+								content.push({id:value.id,name: value.name,animated:value.animated});
 								emote_list[page_num] = JSON.parse(JSON.stringify(content));
-								page_num++;
-								content.length = 0;
-								content_index = 1;
+								content_index++
+								if(content_index > 25){									
+									page_num++;
+									content = [];
+									content_index = 1;
+								}
 							}
 						}
+					}catch(err){
+						global_params.logger.error(err);
 					}
+
 				});	
-				global_params.logger.debug(emote_list);
+				/*global_params.logger.debug(emote_list);*/
 			}
 		});
 		var current_page = 1;

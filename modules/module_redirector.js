@@ -21,7 +21,8 @@ module.exports = (global_params,global_settings,message_type) => {
 			let react_invoker = react_processor(global_params,global_settings,message_type);
 		}else if(message_type.command_name === "send"){/*for send modules*/
 
-		}else if(message_type.command_name === "link"){/*for adding reactions to message outside of channel*/
+		}else if(message_type.command_name === "link" ||
+			message_type.command_name === "le"){/*for adding reactions to message outside of channel*/
 			let link_processor = require("./link_command.js");
 			let link_invoker = link_processor(global_params,global_settings,message_type);			
 		}else if(message_type.command_name === "renameemote"){
