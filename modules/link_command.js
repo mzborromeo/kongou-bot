@@ -16,8 +16,9 @@ module.exports = (global_params,global_settings,message_type) => {
 							embed:{
 								color:7165476,
 								author:{
-									name:"direct link",
-									url:value.url
+									name:value.name,
+									url:value.url,
+									icon_url:value.url
 								},
 								image:{
 									url:value.url
@@ -45,8 +46,9 @@ module.exports = (global_params,global_settings,message_type) => {
 							embed:{
 								color:7165476,
 								author:{
-									name:"direct link",
-									url:value.url
+									name:value.name,
+									url:value.url,
+									icon_url:value.url
 								},
 								image:{
 									url:value.url
