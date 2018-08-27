@@ -4,6 +4,10 @@ const config = require("./config.json");
 const request = require('ajax-request');
 const {google} = require('googleapis');
 const customsearch = google.customsearch('v1');
+const {Pool,Client} = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+});
 
 const log4js = require('log4js');
 log4js.configure({
@@ -37,6 +41,7 @@ function GlobalParam(){
 	this.customsearch = customsearch
 	this.message = undefined;
 	this.env_vars = process.env; 
+	this.pool = pool;
 	var self = this;
 	this.setMessage = function(message_param){
 		self.message = message_param;
