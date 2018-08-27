@@ -58,7 +58,7 @@ client.on("ready", () => {
 	var activities = [
 		{name:"with Teitokou",type:"PLAYING"},
 		{name:"Honkai Impact 3rd",type:"PLAYING"},
-		{name:"Fate Grand Order",type:"PLAYING"},
+		{name:"Fate/Grand Order",type:"PLAYING"},
 		{name:"you",type:"WATCHING"},
 		{name:"Chibi valks in my dorm",type:"WATCHING"},
 		{name:"Blank's MMD video",type:"WATCHING"},
@@ -66,9 +66,12 @@ client.on("ready", () => {
 		{name:monitoring_status,type:"LISTENING"}
 	];
 	var interval = setInterval(function(){
-		var random_index = Math.floor(Math.random() * (activities.length - 0) + 0);
+		var random_index = 6;//Math.floor(Math.random() * (activities.length - 0) + 0);
 		monitoring_status = "to "+client.guilds.size+" guilds, "+client.users.size+" users";
-		client.user.setActivity(activities[random_index].name,{type:activities[random_index].type});
+		if(activities[random_index].type !== "STREAMING"){
+			client.user.setActivity(activities[random_index].name,{type:activities[random_index].type});
+		}
+		
 	},60000);
 	console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
