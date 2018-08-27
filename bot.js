@@ -54,7 +54,22 @@ var global_settings = {
 };
 
 client.on("ready", () => {
-	client.user.setActivity(`on ${client.guilds.size} servers`);
+	var monitoring_status = "to "+client.guilds.size+" guilds, "+client.users.size+" users";
+	var activities = [
+		{name:"with Teitokou",type:"PLAYING"},
+		{name:"Honkai Impact 3rd",type:"PLAYING"},
+		{name:"Fate Grand Order",type:"PLAYING"},
+		{name:"you",type:"WATCHING"},
+		{name:"Chibi valks in my dorm",type:"WATCHING"},
+		{name:"Blank's MMD video",type:"WATCHING"},
+		{name:"you as you speak",type:"LISTENING"},
+		{name:monitoring_status,type:"LISTENING"}
+	];
+	var interval = setInterval(function(){
+		var random_index = Math.floor(Math.random() * (activities.length - 0) + 0);
+		monitoring_status = "to "+client.guilds.size+" guilds, "+client.users.size+" users";
+		client.user.setActivity(activities[random_index].name,{type:activities[random_index].type});
+	},60000);
 	console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
