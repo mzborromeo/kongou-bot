@@ -56,7 +56,7 @@ var global_settings = {
 client.on("ready", () => {
 	var monitoring_status = "to "+client.guilds.size+" guilds, "+client.users.size+" users";
 	var activities = [
-		{name:"with Teitokou",type:"PLAYING"},
+		{name:"with Teitoku",type:"PLAYING"},
 		{name:"Honkai Impact 3rd",type:"PLAYING"},
 		{name:"Fate/Grand Order",type:"PLAYING"},
 		{name:"you",type:"WATCHING"},
