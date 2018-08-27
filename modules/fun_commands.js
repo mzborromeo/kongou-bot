@@ -130,7 +130,7 @@ module.exports = {
 						});			        	
 			        }else{
 						global_params.message.delete(0).then(function(msg){
-							msg.channel.send(name_to_use+", you currently have no "+global_params.config.loli_currency+" to release.");
+							msg.channel.send(name_to_use+", your "+global_params.config.loli_currency+" is not enough to do this.");
 						}).catch(function(err){
 							global_params.logger.error(err);
 						});			        	
@@ -161,7 +161,7 @@ module.exports = {
 			        var kidnapping_record_columns = kidnapping_record_string.split(",");
 			        /*global_params.logger.debug(kidnapping_record_columns[0]);*/
 			        if(kidnapping_record_columns[0] === "t"){
-						msg.channel.send(name_to_use+", kidnapped "+kidnapping_record_columns[1]+" "+global_params.config.loli_currency+". You now have "+kidnapping_record_columns[1]+" "+global_params.config.loli_currency);
+						msg.channel.send(name_to_use+", kidnapped "+kidnapping_record_columns[1]+" "+global_params.config.loli_currency+". You now have "+kidnapping_record_columns[2]+" "+global_params.config.loli_currency);
 			        }else{
 						msg.channel.send(name_to_use+", sorry you were late. Someone already kidnapped the loli/s.");
 			        }
