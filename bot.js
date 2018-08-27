@@ -66,7 +66,7 @@ client.on("ready", () => {
 		{name:monitoring_status,type:"LISTENING"}
 	];
 	var interval = setInterval(function(){
-		var random_index = 6;//Math.floor(Math.random() * (activities.length - 0) + 0);
+		var random_index = Math.floor(Math.random() * (activities.length - 0) + 0);
 		monitoring_status = "to "+client.guilds.size+" guilds, "+client.users.size+" users";
 		if(activities[random_index].type !== "STREAMING"){
 			client.user.setActivity(activities[random_index].name,{type:activities[random_index].type});
