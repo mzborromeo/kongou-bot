@@ -61,15 +61,23 @@ var global_settings = {
 client.on("ready", () => {
 	var monitoring_status = "to "+client.guilds.size+" guilds, "+client.users.size+" users";
 	var activities = [
-		{name:"with Teitoku",type:"PLAYING"},
-		{name:"Honkai Impact 3rd",type:"PLAYING"},
-		{name:"Fate/Grand Order",type:"PLAYING"},
-		{name:"you",type:"WATCHING"},
-		{name:"Chibi valks in my dorm",type:"WATCHING"},
-		{name:"Blank's MMD video",type:"WATCHING"},
-		{name:"you as you speak",type:"LISTENING"},
-		{name:monitoring_status,type:"LISTENING"}
-	];
+	          		{name:"with Teitokou",type:"PLAYING"},
+	          		{name:"Honkai Impact 3rd",type:"PLAYING"},
+	          		{name:"Fate/Grand Order",type:"PLAYING"},
+	          		{name:"BanG Dream! Garupa",type:"PLAYING"},
+	          		{name:"Counter-Strike: Global Offensive",type:"PLAYING"},
+	          		{name:"Monster Hunter: World",type:"PLAYING"},
+	          		{name:"Black Desert Online",type:"PLAYING"},
+	          		{name:"Warframe",type:"PLAYING"},
+	          		{name:"DOTA 2",type:"PLAYING"},
+	          		{name:"you",type:"WATCHING"},
+	          		{name:"the chibi lesbian valks in my dorm",type:"WATCHING"},
+	          		{name:"anime",type:"WATCHING"},
+	          		{name:"Loli Platelets",type:"WATCHING"},
+	          		{name:"Blank's MMD video",type:"WATCHING"},
+	          		{name:"you as you speak",type:"LISTENING"},
+	          		{name:monitoring_status,type:"LISTENING"}
+	          	];
 	var interval = setInterval(function(){
 		var random_index = Math.floor(Math.random() * (activities.length - 0) + 0);
 		monitoring_status = "to "+client.guilds.size+" guilds, "+client.users.size+" users";
