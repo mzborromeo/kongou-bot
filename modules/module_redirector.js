@@ -70,7 +70,7 @@ module.exports = (global_params,global_settings,message_type) => {
 								name:final_user,
 								icon_url:global_params.message.author.displayAvatarURL
 							},
-							timestamp:new Date();
+							timestamp:new Date()
 						}
 					});					
 				}
