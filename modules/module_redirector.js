@@ -62,7 +62,7 @@ module.exports = (global_params,global_settings,message_type) => {
 							}) 
 							.catch(console.error);				
 					var nickname = global_params.message.guild.members.get(global_params.message.author.id).nickname;
-					var final_user = (nickname === "" || nickname === undefined || nickname === null)?global_params.message.author.username+"#"+global_params.message.author.discriminator:nickname;
+					var final_user = (nickname === "" || nickname === undefined || nickname === null)?global_params.message.author.username:nickname;
 					global_params.message.channel.send(emoji_message,{
 						embed:{
 							color: 7165476,
