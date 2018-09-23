@@ -5,8 +5,7 @@
   "main": "bot.js",
   "dependencies": {
     "ajax-request": "^1.2.3",
-    "discord.io": "^2.5.3",
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.4.2",
     "googleapis": "^32.0.0",
     "log4js": "^3.0.1",
     "pg": "^7.4.3",
