@@ -92,7 +92,7 @@ client.on("ready", () => {
 client.on("message", (message) => {
 	var global_params = new GlobalParam();
 	global_params.setMessage(message);
-	if (message.author.bot) return;/*ignore bots*/
+	if (message.author.bot && message.author.id !== "493352420831920128") return;/*ignore bots*/
 	
 	if(message.channel.type === "dm" && message.author.id !== process.env.OWNER_ID){/*dm from other user*/
 		dm_logger.info("message from: "+message.author.username+"#"+message.author.discriminator+"("+message.author.id+") containing: "+message.content);
