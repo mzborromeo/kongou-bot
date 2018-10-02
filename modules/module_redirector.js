@@ -4,6 +4,7 @@ module.exports = (global_params,global_settings,message_type) => {
 		return;
 	}
 	var fun_command_processor = require("./fun_commands.js");
+	var admin_command_processor = require("./admin_commands.js");
 	if(message_type.command_type === "command"){
 		if(message_type.command_name === "list" ||
 			message_type.command_name === "ls" ||
@@ -38,6 +39,8 @@ module.exports = (global_params,global_settings,message_type) => {
 			let gsearch_invoker = gsearch_processor(global_params,global_settings,message_type);						
 		}else if(fun_command_processor.check_names(message_type.command_name).has_match ===true){
 			let command_invoker = fun_command_processor[fun_command_processor.check_names(message_type.command_name).matching_name](global_params,global_settings,message_type);
+		}else if(admin_command_processor.check_names(message_type.command_name).has_match ===true){
+			let command_invoker = admin_command_processor[admin_command_processor.check_names(message_type.command_name).matching_name](global_params,global_settings,message_type);
 		}
 	}else if(message_type.command_type === "emoji_request"){
 		var x = 0;
