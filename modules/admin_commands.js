@@ -59,7 +59,7 @@ module.exports = {
 							var member_nickname = msg.guild.members.get(mentioned_user).nickname;
 							var member_final_user = (member_nickname === "" ||
 							 member_nickname === undefined || 
-							 member_nickname === null)?msg.guild.members.get(mentioned_user).user.username:nickname;							
+							 member_nickname === null)?msg.guild.members.get(mentioned_user).user.username:member_nickname;							
 							msg.mentions.members.get(mentioned_user).setRoles(mute_roles).then(function(){
 								global_params.logger.debug("Added roles: "+mute_roles);
 								msg.channel.send(final_user+", "+member_final_user+" is now muted");
@@ -114,7 +114,7 @@ module.exports = {
 								var member_nickname = msg.guild.members.get(mentioned_user).nickname;
 								var member_final_user = (member_nickname === "" ||
 								member_nickname === undefined || 
-								member_nickname === null)?msg.guild.members.get(mentioned_user).user.username:nickname;							
+								member_nickname === null)?msg.guild.members.get(mentioned_user).user.username:member_nickname;							
 								msg.mentions.members.get(mentioned_user).setRoles(roleslist).then(function(){
 									global_params.logger.debug("Added roles: "+roleslist);
 									msg.channel.send(final_user+", "+member_final_user+" is now unmuted");
