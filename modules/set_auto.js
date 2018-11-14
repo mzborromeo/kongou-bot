@@ -39,6 +39,10 @@ module.exports = (global_params,global_settings,message_type) => {
 				old_val = JSON.parse(global_settings.gei);
 				global_settings.gei = false;
 				send_success(global_params.message,message_type.command_name,setting.toLowerCase(),old_val,global_settings.gei);
+			}else if(setting.toLowerCase() === "gk"){
+				old_val = JSON.parse(global_settings.gk);
+				global_settings.gk = false;
+				send_success(global_params.message,message_type.command_name,setting.toLowerCase(),old_val,global_settings.gk);
 			}else{
 				global_params.message.channel.send("<@"+global_params.message.author.id+">, no settings found for that keyword.");
 			}
@@ -56,6 +60,10 @@ module.exports = (global_params,global_settings,message_type) => {
 				old_val = JSON.parse(global_settings.gei);
 				global_settings.gei = true;
 				send_success(global_params.message,message_type.command_name,setting.toLowerCase(),old_val,global_settings.gei);
+			}else if(setting.toLowerCase() === "gk"){
+				old_val = JSON.parse(global_settings.gk);
+				global_settings.gk = true;
+				send_success(global_params.message,message_type.command_name,setting.toLowerCase(),old_val,global_settings.gk);
 			}else{
 				global_params.message.channel.send("<@"+global_params.message.author.id+">, no settings found for that keyword.");
 			}

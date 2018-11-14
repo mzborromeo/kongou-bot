@@ -55,7 +55,8 @@ function GlobalParam(){
 var global_settings = {
 	f2p:false,
 	bff:false,
-	gei:false
+	gei:false,
+	gk:false
 };
 
 client.on("ready", () => {

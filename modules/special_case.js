@@ -8,6 +8,8 @@ module.exports = (global_params,global_settings,message_type) => {
 		author id: 349399428810932234
 		emi id: 232221425329504257
 		yush id: 109385289813798912
+		tim id: 355712417700904970
+		
 	*/
 	if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
 		/*emi case 232221425329504257 */
@@ -63,5 +65,13 @@ module.exports = (global_params,global_settings,message_type) => {
 						})(global_params.message);
 	}else if(message_content.includes("patchy is") && global_settings.bff === true){/*custom react test*/
 		global_params.message.channel.send("Sarin's bff");
+	}else if(global_params.message.author.id === "355712417700904970" && global_settings.gk === true){
+		var responses = ["You come back here and roll for her Milord. Your luck is with us.",
+		                 "Wanna know why you still don't have her Milord?," +
+		                 "Pro tip: your luck is here"];
+		if(message_content.includes("where my gk?")){
+			var rnd_index = Math.floor(Math.random() * (rnd_index.length - 0 + 0)) + 0;
+			global_params.message.channel.send(responses[rnd_index]);
+		}
 	}
 }
