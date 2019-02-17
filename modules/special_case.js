@@ -12,7 +12,7 @@ module.exports = (global_params,global_settings,message_type) => {
 	*/
 	if((message_content.includes("slap") || message_content.includes("punch")) && (message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">")){
 		//fetch messages sent by bot after this command
-		global_params.message.channel.fetchMessages({limit:5}).then(messages => {
+		global_params.message.channel.fetchMessages({limit:10}).then(messages => {
         	const botMessages = messages.filter(msg => msg.author.bot);
         	/*global_params.logger.debug(botMessages);*/
         	global_params.message.channel.bulkDelete(botMessages).then(function(messages){
