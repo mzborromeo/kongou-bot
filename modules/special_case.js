@@ -27,8 +27,7 @@ module.exports = (global_params,global_settings,message_type) => {
 		        	}).catch(function(error){
 		        		global_params.logger.debug(error);		
 		        	});   
-		        	console.log("deleted "+messagesDeleted+" messages");
-	        		global_params.logger.info("deleted "+messagesDeleted+" messages");     		
+	        		global_params.logger.debug("deleted "+messagesDeleted+" messages");     		
 	        	}).catch(function(error){
 	        		global_params.logger.debug(error);	
 	        	});
