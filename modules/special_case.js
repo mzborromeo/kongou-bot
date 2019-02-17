@@ -5,31 +5,34 @@ module.exports = (global_params,global_settings,message_type) => {
 	message_content = message_content.toLowerCase();
 	var channel_name = global_params.client.channels.get(global_params.message.channel.id).name+"";
 	/*
-	author id: 349399428810932234
-	emi id: 232221425329504257
-	yush id: 109385289813798912
-	Arciel id: 151255303852261376
+		author id: 349399428810932234
+		emi id: 232221425329504257
+		yush id: 109385289813798912
+		Arciel id: 151255303852261376
 	*/
-/*	if((message_content.includes("slap") || message_content.includes("punch")) && (message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">")){
+	if((message_content.includes("slap") || message_content.includes("punch")) && (message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">")){
 		//fetch messages sent by bot after this command
 		global_params.message.channel.fetchMessages({limit:5}).then(messages => {
-	    	const botMessages = messages.filter(msg => msg.author.bot);
-	    	global_params.logger.debug(botMessages);
-	    	global_params.message.channel.bulkDelete(botMessages).then(function(messages){
-	    		global_params.message.channel.send("No one is allowed to slap or punch my mastah!!");
-	    		global_params.logger.info("deleted messages");
-	        	global_params.message.delete(
-	        	).then(function(message){
+        	const botMessages = messages.filter(msg => msg.author.bot);
+        	/*global_params.logger.debug(botMessages);*/
+        	global_params.message.channel.bulkDelete(botMessages).then(function(messages){
+        		global_params.message.delete().then(function(message){
+	        		global_params.message.channel.send("No one is allowed to slap or punch my mastah!!").then(function(){
+	        			global_params.logger.debug("Reply success");	
+	        		}).catch(function(){
+	        			global_params.logger.debug("Failed to send message an error occured");	
+	        		});
 	        	}).catch(function(error){
 	        		global_params.logger.debug(error);		
-	        	});        		
-	    	}).catch(function(error){
-	    		global_params.logger.debug(error);	
-	    	});
-		}).catch(function(error){
-			global_params.logger.debug(error);
-		});
-	}else */if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
+	        	});   
+        		global_params.logger.info("deleted messages");     		
+        	}).catch(function(error){
+        		global_params.logger.debug(error);	
+        	});
+    	}).catch(function(error){
+    		global_params.logger.debug(error);
+    	});
+	}else if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
 		/*emi case 232221425329504257 */
 		try{
 			global_params.logger.debug("user matched");
@@ -83,13 +86,5 @@ module.exports = (global_params,global_settings,message_type) => {
 						})(global_params.message);
 	}else if(message_content.includes("patchy is") && global_settings.bff === true){/*custom react test*/
 		global_params.message.channel.send("Sarin's bff");
-	}else if(global_params.message.author.id === "355712417700904970" && global_settings.gk === true){
-		var responses = ["You come back here and roll for her Milord. Your luck is with us.",
-		                 "Wanna know why you still don't have her Milord?," +
-		                 "Pro tip: your luck is here"];
-		if(message_content.includes("where my gk?")){
-			var rnd_index = Math.floor(Math.random() * (rnd_index.length - 0 + 0)) + 0;
-			global_params.message.channel.send(responses[rnd_index]);
-		}
 	}
 }
