@@ -15,7 +15,7 @@ module.exports = (global_params,global_settings,message_type) => {
 		global_params.message.channel.fetchMessages({limit:5}).then(messages => {
 	    	const botMessages = messages.filter(msg => msg.author.bot);
 	    	/*global_params.logger.debug(botMessages);*/
-	    	global_params.message.channel.bulkDelete(messages).then(function(messages){
+	    	global_params.message.channel.bulkDelete(botMessages).then(function(messages){
 	    		global_params.logger.info("deleted messages");
 	    	}).catch(function(error){
 	    		global_params.logger.debug(error);	
