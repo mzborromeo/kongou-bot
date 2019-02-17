@@ -10,12 +10,13 @@ module.exports = (global_params,global_settings,message_type) => {
 		yush id: 109385289813798912
 		Arciel id: 151255303852261376
 	*/
-/*	if((message_content.includes("slap") || message_content.includes("punch")) && (message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">")){
+	if((message_content.includes("slap") || message_content.includes("punch")) && (message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">")){
 		//fetch messages sent by bot after this command
 		global_params.message.channel.fetchMessages({limit:5,after:global_params.message.id}).then(messages => {
         	const botMessages = messages.filter(msg => msg.author.bot);
-        	global_params.logger.debug(botMessages);
+        	/*global_params.logger.debug(botMessages);*/
         	global_params.message.channel.bulkDelete(botMessages).then(function(messages){
+        		var messagesDeleted = botMessages.array().length; 
         		global_params.message.channel.send("No one is allowed to slap or punch my mastah!!").then(function(){
 	        		global_params.logger.debug("Reply success");	
 	        	}).catch(function(){
@@ -25,14 +26,15 @@ module.exports = (global_params,global_settings,message_type) => {
 	        	}).catch(function(error){
 	        		global_params.logger.debug(error);		
 	        	});   
-        		global_params.logger.info("deleted messages");     		
+	        	console.log("deleted "+messagesDeleted+" messages");
+        		global_params.logger.info("deleted "+messagesDeleted+" messages");     		
         	}).catch(function(error){
         		global_params.logger.debug(error);	
         	});
     	}).catch(function(error){
     		global_params.logger.debug(error);
     	});
-	}else */if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
+	}else if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
 		/*emi case 232221425329504257 */
 		try{
 			global_params.logger.debug("user matched");
