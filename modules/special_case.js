@@ -5,13 +5,25 @@ module.exports = (global_params,global_settings,message_type) => {
 	message_content = message_content.toLowerCase();
 	var channel_name = global_params.client.channels.get(global_params.message.channel.id).name+"";
 	/*
-		author id: 349399428810932234
-		emi id: 232221425329504257
-		yush id: 109385289813798912
-		tim id: 355712417700904970
-		
+	author id: 349399428810932234
+	emi id: 232221425329504257
+	yush id: 109385289813798912
+	Arciel id: 151255303852261376
 	*/
-	if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
+	if((message_content.includes("slap") || message_content.includes("punch")) && (message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">")){
+		//fetch messages sent by bot after this command
+		global_params.message.channel.fetchMessages({limit:5}).then(messages => {
+	    	const botMessages = messages.filter(msg => msg.author.bot);
+	    	/*global_params.logger.debug(botMessages);*/
+	    	global_params.message.channel.bulkDelete(messages).then(function(messages){
+	    		global_params.logger.info("deleted messages");
+	    	}).catch(function(error){
+	    		global_params.logger.debug(error);	
+	    	});
+		}).catch(function(error){
+			global_params.logger.debug(error);
+		});
+	}else if(global_params.message.author.id === "232221425329504257" && global_settings.f2p === true){
 		/*emi case 232221425329504257 */
 		try{
 			global_params.logger.debug("user matched");
