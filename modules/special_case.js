@@ -10,7 +10,7 @@ module.exports = (global_params,global_settings,message_type) => {
 		yush id: 109385289813798912
 		Arciel id: 151255303852261376
 	*/
-	if((message_content.includes("slap") || message_content.includes("punch")) && (message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">")){
+	if((message_content.includes("slap") || message_content.includes("punch")) && ((message_content.includes("kirimaru")) || message_content.includes("<@"+global_params.env_vars.OWNER_ID+">"))){
 		//fetch messages sent by bot after this command
 		setTimeout(function(){
 			global_params.message.channel.fetchMessages({limit:5,after:global_params.message.id}).then(messages => {
@@ -27,7 +27,8 @@ module.exports = (global_params,global_settings,message_type) => {
 		        	}).catch(function(error){
 		        		global_params.logger.debug(error);		
 		        	});   
-	        		global_params.logger.debug("deleted "+messagesDeleted+" messages");     		
+		        	console.log("deleted "+messagesDeleted+" messages");
+	        		global_params.logger.info("deleted "+messagesDeleted+" messages");     		
 	        	}).catch(function(error){
 	        		global_params.logger.debug(error);	
 	        	});
