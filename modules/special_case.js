@@ -90,8 +90,5 @@ module.exports = (global_params,global_settings,message_type) => {
 						})(global_params.message);
 	}else if(message_content.includes("patchy is") && global_settings.bff === true){/*custom react test*/
 		global_params.message.channel.send("Sarin's bff");
-	}else if(message_content.includes("MIC")){
-		console.log("Weee");
-		global_params.message.channel.send("Test");
 	}
 }
